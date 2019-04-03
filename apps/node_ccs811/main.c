@@ -16,6 +16,11 @@
 #include "coap_position.h"
 #include "coap_ccs811.h"
 
+#ifdef MODULE_COAP_SUIT
+#include "suit/coap.h"
+#include "riotboot/slot.h"
+#endif
+
 static const shell_command_t shell_commands[] = {
     { NULL, NULL, NULL }
 };
@@ -29,11 +34,15 @@ extern int _gnrc_netif_config(int argc, char **argv);
 /* CoAP resources (alphabetical order) */
 static const coap_resource_t _resources[] = {
     { "/board", COAP_GET, board_handler, NULL },
+    { "/eco2", COAP_GET, ccs811_eco2_handler, NULL },
     { "/mcu", COAP_GET, mcu_handler, NULL },
     { "/name", COAP_GET, name_handler, NULL },
     { "/os", COAP_GET, os_handler, NULL },
     { "/position", COAP_GET, position_handler, NULL },
-    { "/eco2", COAP_GET, ccs811_eco2_handler, NULL },
+#ifdef MODULE_COAP_SUIT
+    /* this line adds the whole "/suit"-subtree */
+    SUIT_COAP_SUBTREE,
+#endif
     { "/tvoc", COAP_GET, ccs811_tvoc_handler, NULL },
 };
 
@@ -61,6 +70,11 @@ int main(void)
     gcoap_register_listener(&_listener);
     init_beacon_sender();
     init_ccs811_sender(true, true);
+
+#ifdef MODULE_COAP_SUIT
+    /* start suit coap updater thread */
+    suit_coap_run();
+#endif
 
     puts("All up, running the shell now");
     char line_buf[SHELL_DEFAULT_BUFSIZE];

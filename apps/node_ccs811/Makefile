@@ -7,6 +7,12 @@ BOARD = samr21-xpro
 # This has to be the absolute path to the RIOT base directory:
 RIOTBASE ?= $(CURDIR)/../../RIOT
 
+# Include suit Update firmware, default doesn't include
+USE_SUIT ?= 0
+ifeq (1, $(USE_SUIT))
+  USEMODULE += coap_suit
+endif
+
 # Riot Application modules
 USEMODULE += ccs811
 USEMODULE += shell_common

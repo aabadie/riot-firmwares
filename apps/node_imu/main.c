@@ -18,6 +18,11 @@
 #include "coap_common.h"
 #include "coap_imu.h"
 
+#ifdef MODULE_COAP_SUIT
+#include "suit/coap.h"
+#include "riotboot/slot.h"
+#endif
+
 static const shell_command_t shell_commands[] = {
     { NULL, NULL, NULL }
 };
@@ -35,6 +40,10 @@ static const coap_resource_t _resources[] = {
     { "/mcu", COAP_GET, mcu_handler, NULL },
     { "/name", COAP_GET, name_handler, NULL },
     { "/os", COAP_GET, os_handler, NULL },
+#ifdef MODULE_COAP_SUIT
+    /* this line adds the whole "/suit"-subtree */
+    SUIT_COAP_SUBTREE,
+#endif
 };
 
 static gcoap_listener_t _listener = {
@@ -65,6 +74,11 @@ int main(void)
     LED0_TOGGLE;
     LED1_TOGGLE;
     LED2_TOGGLE;
+
+#ifdef MODULE_COAP_SUIT
+    /* start suit coap updater thread */
+    suit_coap_run();
+#endif
 
     puts("All up, running the shell now");
     char line_buf[SHELL_DEFAULT_BUFSIZE];

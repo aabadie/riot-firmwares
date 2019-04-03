@@ -16,6 +16,11 @@
 #include "coap_position.h"
 #include "coap_bmp180.h"
 
+#ifdef MODULE_COAP_SUIT
+#include "suit/coap.h"
+#include "riotboot/slot.h"
+#endif
+
 static const shell_command_t shell_commands[] = {
     { NULL, NULL, NULL }
 };
@@ -34,6 +39,10 @@ static const coap_resource_t _resources[] = {
     { "/os", COAP_GET, os_handler, NULL },
     { "/position", COAP_GET, position_handler, NULL },
     { "/pressure", COAP_GET, bmp180_pressure_handler, NULL },
+#ifdef MODULE_COAP_SUIT
+    /* this line adds the whole "/suit"-subtree */
+    SUIT_COAP_SUBTREE,
+#endif
     { "/temperature", COAP_GET, bmp180_temperature_handler, NULL },
 };
 
@@ -61,6 +70,11 @@ int main(void)
     gcoap_register_listener(&_listener);
     init_beacon_sender();
     init_bmp180_sender(true, true);
+
+#ifdef MODULE_COAP_SUIT
+    /* start suit coap updater thread */
+    suit_coap_run();
+#endif
 
     puts("All up, running the shell now");
     char line_buf[SHELL_DEFAULT_BUFSIZE];

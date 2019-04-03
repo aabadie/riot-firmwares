@@ -16,6 +16,11 @@
 #include "coap_common.h"
 #include "coap_io1_xplained.h"
 
+#ifdef MODULE_COAP_SUIT
+#include "suit/coap.h"
+#include "riotboot/slot.h"
+#endif
+
 static const shell_command_t shell_commands[] = {
     { NULL, NULL, NULL }
 };
@@ -32,6 +37,10 @@ static const coap_resource_t _resources[] = {
     { "/mcu", COAP_GET, mcu_handler, NULL },
     { "/name", COAP_GET, name_handler, NULL },
     { "/os", COAP_GET, os_handler, NULL },
+#ifdef MODULE_COAP_SUIT
+    /* this line adds the whole "/suit"-subtree */
+    SUIT_COAP_SUBTREE,
+#endif
     { "/temperature", COAP_GET, io1_xplained_temperature_handler, NULL },
 };
 
@@ -59,6 +68,11 @@ int main(void)
     gcoap_register_listener(&_listener);
     init_beacon_sender();
     init_io1_xplained_temperature_sender();
+
+#ifdef MODULE_COAP_SUIT
+    /* start suit coap updater thread */
+    suit_coap_run();
+#endif
 
     puts("All up, running the shell now");
     char line_buf[SHELL_DEFAULT_BUFSIZE];

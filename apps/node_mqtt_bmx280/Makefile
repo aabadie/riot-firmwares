@@ -9,6 +9,12 @@ DRIVER ?= bme280
 # This has to be the absolute path to the RIOT base directory:
 RIOTBASE ?= $(CURDIR)/../../RIOT
 
+# Include suit Update firmware, default doesn't include
+USE_SUIT ?= 0
+ifeq (1, $(USE_SUIT))
+  USEMODULE += coap_suit
+endif
+
 # Riot Application modules
 USEMODULE += shell_common
 
