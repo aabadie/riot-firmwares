@@ -29,10 +29,10 @@ QUIET ?= 1
 
 # Application specific definitions and includes
 NODE_ID ?= "mqtt-2"
-APPLICATION_NAME ?= "Node\ BME280\ MQTT-SN"
+APPLICATION_NAME ?= "Node\ BME280\ MQTT-SN\ -\ SIDO"
 # CoAP broker server information
-GATEWAY_ADDR ?= fd00:abad:1e:102::1
-GATEWAY_PORT ?= 1885
+BROKER_ADDR ?= fd00:ab:ad:1e::1
+BROKER_PORT ?= 5683
 
 include $(CURDIR)/../Makefile.dep
 include $(CURDIR)/../Makefile.include

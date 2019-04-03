@@ -39,9 +39,9 @@ DEVELHELP ?= 1
 QUIET ?= 1
 
 # Application specific definitions and includes
-APPLICATION_NAME ?= "IMU\ Unit"
+APPLICATION_NAME ?= "IMU\ Unit\ -\ SIDO"
 # CoAP broker server information
-BROKER_ADDR ?= 2001:660:3207:102::4
+BROKER_ADDR ?= fd00:ab:ad:1e::1
 BROKER_PORT ?= 5683
 
 include $(CURDIR)/../Makefile.dep

@@ -25,12 +25,12 @@ USEMODULE += coap_position
 QUIET ?= 1
 
 # Application specific definitions and includes
-APPLICATION_NAME ?= "Node"
+APPLICATION_NAME ?= "Updatable\ device\ -\ SIDO"
 # CoAP broker server information
-BROKER_ADDR ?= 2001:660:3207:102::4
+BROKER_ADDR ?= fd00:ab:ad:1e::1
 BROKER_PORT ?= 5683
-NODE_LAT ?= 48.714784
-NODE_LNG ?= 2.205502
+NODE_LAT ?= 45.7832415
+NODE_LNG ?= 4.8488309
 
 include $(CURDIR)/../Makefile.dep
 include $(CURDIR)/../Makefile.include
