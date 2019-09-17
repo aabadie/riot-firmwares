@@ -20,6 +20,8 @@ enum {
     TFT_DISPLAY_HELLO = 0xA5,
     TFT_DISPLAY_TVOC  = 0xA6,
     TFT_DISPLAY_ECO2  = 0xA7,
+    TFT_DISPLAY_TSP   = 0xA8,
+    TFT_DISPLAY_TLP   = 0xA9,
 };
 
 /**

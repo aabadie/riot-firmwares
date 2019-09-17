@@ -143,7 +143,8 @@ static void _clear_logo_area(ucg_t* ucg)
 
 static void _clear_data_area(ucg_t* ucg)
 {
-#if defined(MODULE_BMX280) && defined(MODULE_CCS811)
+#if ((defined(MODULE_BMX280) + defined(MODULE_CCS811) + \
+      defined(MODULE_SM_PWM_01C)) > 1)
     ucg_SetColor(ucg, 0, 0, 0, 0);
     ucg_DrawBox(ucg, 0, 66, 128, 40);
     ucg_SetColor(ucg, 0, 255, 255, 255);
@@ -240,6 +241,17 @@ void *tft_display_thread(void *args)
             case TFT_DISPLAY_TVOC:
                 ucg_SetFont(ucg, ucg_font_profont15_mr);
                 tft_puts(ucg,"TVOC: ", m.content.ptr, NULL, 64, 84, 1);
+                display_release();
+                break;
+            case TFT_DISPLAY_TSP:
+                _clear_data_area(ucg);
+                ucg_SetFont(ucg, ucg_font_profont15_mr);
+                tft_puts(ucg,"TSP: ", m.content.ptr, NULL, 64, 66, 1);
+                display_release();
+                break;
+            case TFT_DISPLAY_TLP:
+                ucg_SetFont(ucg, ucg_font_profont15_mr);
+                tft_puts(ucg,"TLP: ", m.content.ptr, NULL, 64, 84, 1);
                 display_release();
                 break;
             case TFT_DISPLAY_HELLO:
