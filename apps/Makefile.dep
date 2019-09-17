@@ -71,6 +71,10 @@ ifneq (,$(filter tft_display,$(USEMODULE)))
   USEPKG += ucglib
 endif
 
+ifneq (,$(filter coap_sm_pwm_01c,$(USEMODULE)))
+  USEMODULE += sm_pwm_01c
+endif
+
 ifneq (,$(filter sm_pwm_01c,$(USEMODULE)))
   USEMODULE += xtimer
   FEATURES_REQUIRED += periph_gpio

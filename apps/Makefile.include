@@ -54,6 +54,11 @@ DIRS += $(CURDIR)/../../modules/coap_tsl2561
 INCLUDES += -I$(CURDIR)/../../modules/coap_tsl2561
 endif
 
+ifneq (,$(filter coap_sm_pwm_01c, $(USEMODULE)))
+DIRS += $(CURDIR)/../../modules/coap_sm_pwm_01c
+INCLUDES += -I$(CURDIR)/../../modules/coap_sm_pwm_01c
+endif
+
 ifneq (,$(filter coap_utils, $(USEMODULE)))
 DIRS += $(CURDIR)/../../modules/coap_utils
 INCLUDES += -I$(CURDIR)/../../modules/coap_utils
