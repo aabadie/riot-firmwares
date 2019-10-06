@@ -6,8 +6,8 @@ ifeq (1, $(RPI))
   BROKER_PORT ?= 5683
 else
   # CoAP broker server information
-  BROKER_ADDR ?= fd00:dead:beef::1
-  BROKER_PORT ?= 5688
+  BROKER_ADDR ?= 2001:660:5307:31bf::4
+  BROKER_PORT ?= 5684
 endif
 
 ifeq (1, $(USE_SUIT))
