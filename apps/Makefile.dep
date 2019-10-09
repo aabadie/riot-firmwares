@@ -13,6 +13,8 @@ endif
 ifeq (1, $(USE_SUIT))
   USEMODULE += coap_suit
   USEMODULE += suitreg
+  USEMODULE += progress_bar
+  USEMODULE += progress_bar_suit
 endif
 
 ifeq (1, $(USE_TFT))

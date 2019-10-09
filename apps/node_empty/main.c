@@ -23,6 +23,10 @@
 #include "tft_display.h"
 #endif
 
+#ifdef MODULE_PROGRESS_BAR_SUIT
+#include "progress_bar_suit.h"
+#endif
+
 #ifdef MODULE_COAP_SUIT
 #include "suit/coap.h"
 #include "riotboot/slot.h"
@@ -95,6 +99,10 @@ int main(void)
     /* start tft displays*/
     init_st7735_printer(&ucg);
     display_send_val(TFT_DISPLAY_HELLO, 0);
+#endif
+
+#ifdef MODULE_PROGRESS_BAR_SUIT
+    init_progress_bar_printer();
 #endif
 
     /* init schedreg thread */

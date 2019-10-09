@@ -95,6 +95,11 @@ ifneq (,$(filter sm_pwm_01c,$(USEMODULE)))
   INCLUDES += -I$(CURDIR)/../../modules/sm_pwm_01c/include
 endif
 
+ifneq (,$(filter progress_bar_suit, $(USEMODULE)))
+  DIRS += $(CURDIR)/../../modules/progress_bar_suit
+  INCLUDES += -I$(CURDIR)/../../modules/progress_bar_suit
+endif
+
 .PHONY: host-tools
 
 host-tools:
